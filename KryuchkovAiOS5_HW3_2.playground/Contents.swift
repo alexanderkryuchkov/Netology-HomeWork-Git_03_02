@@ -32,3 +32,42 @@ print("Анкета соискателя: \(personOne.firstName)  \(personOne.se
 
 print("Анкета соискателя: \(personTwo.firstName)  \(personTwo.secondName), возраст: \(personTwo.age), образование: \(personTwo.education)")
 
+// Создание протокола и класса
+
+// Протокол абстракции пилота
+protocol PilotSetting {
+    var firstName: String  {get set}
+    var secondName: String  {get set}
+    var qualification: String {get set}
+    var flyingHours: Int  {get set}
+    
+    func examenQualification(from: Int, to: String)
+    
+    func addFlyingHours(from: Int, to: Int)
+}
+
+class Pilot: PilotSetting {
+    var firstName: String
+    var secondName: String
+    var qualification: String
+    var flyingHours: Int
+    
+    // Подумать насчет перечисления квалификаций и зависимости от часов
+    func examenQualification(from: Int, to: String) {
+        print("пока тест")
+    }
+    
+    func addFlyingHours(from: Int, to: Int) {
+        flyingHours += 1
+        
+    // Если количество часов будет превышать столько то, тогда квалификация становится выше
+    }
+    
+    init(firstName: String, secondName: String, qualification: String, flyingHours: Int) {
+        self.firstName = firstName
+        self.secondName = secondName
+        self.qualification = qualification
+        self.flyingHours = flyingHours
+    }
+    
+}
