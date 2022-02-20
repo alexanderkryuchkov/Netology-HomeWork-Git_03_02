@@ -40,25 +40,36 @@ protocol PilotSetting {
     var secondName: String  {get set}
     var qualification: String {get set}
     var flyingHours: Int  {get set}
-    
-    func examenQualification(from: Int, to: String)
-    
-    func addFlyingHours(from: Int, to: Int)
+        
+    func addFlyingHours(by amount: Int)
 }
 
+
 class Pilot: PilotSetting {
+    
     var firstName: String
     var secondName: String
-    var qualification: String
+    var qualification: String = ""
     var flyingHours: Int
     
-    // Подумать насчет перечисления квалификаций и зависимости от часов
-    func examenQualification(from: Int, to: String) {
-        print("пока тест")
+    // Внутренняя функция пересчета квалификации
+    private func examenQualification() {
+        
+        switch flyingHours {
+        case 300...500:
+            qualification = "Пилот"
+        case 501...1000:
+            qualification = "Опытный пилот"
+        case 1000...:
+            qualification = "Гуру"
+        default:
+            qualification = "Ученик"
+        }
     }
     
-    func addFlyingHours(from: Int, to: Int) {
-        flyingHours += 1
+    func addFlyingHours(by amount: Int) {
+        flyingHours += amount
+        examenQualification()
         
     // Если количество часов будет превышать столько то, тогда квалификация становится выше
     }
@@ -68,6 +79,8 @@ class Pilot: PilotSetting {
         self.secondName = secondName
         self.qualification = qualification
         self.flyingHours = flyingHours
+        
+        examenQualification()
     }
     
 }
